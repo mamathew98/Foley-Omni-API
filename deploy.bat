@@ -129,7 +129,13 @@ if /I "%TOKEN_STATUS%"=="GENERATED" (
 )
 
 if not exist "storage" mkdir storage
+if not exist "storage\cache\huggingface" mkdir storage\cache\huggingface
+if not exist "storage\cache\torch" mkdir storage\cache\torch
 if not exist "ckpts" mkdir ckpts
+findstr /R /C:"^SKIP_MODEL_LOAD=1" ".env" >nul 2>&1
+if not errorlevel 1 (
+  echo [deploy] NOTE: .env has SKIP_MODEL_LOAD=1 ^(local UI smoke^). Docker Compose overrides this to 0.
+)
 
 if "%SKIP_DOWNLOAD%"=="0" (
   echo [deploy] Ensuring huggingface_hub is available...

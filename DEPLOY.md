@@ -103,6 +103,26 @@ First start loads DiT + T5 + VAE into GPU memory (several minutes).
 
 Open: `http://localhost:8000/`
 
+### Docker deploy checklist
+
+Before calling the stack production-ready, confirm:
+
+1. `docker run --rm --gpus all nvidia/cuda:12.4.1-base-ubuntu22.04 nvidia-smi` works  
+2. `./ckpts/Foley-Omni/v2st.pth` (and related files) exist — `python scripts/check_setup.py`  
+3. `.env` has distinct `ACCESS_TOKEN` / `ADMIN_TOKEN` (not placeholder values)  
+4. Compose forces `SKIP_MODEL_LOAD=0` even if your local `.env` has `1` for UI smoke tests  
+5. Port **8000** is free on the host; firewall opened if serving by IP  
+6. Prefer **≥24GB VRAM**; set `CPU_OFFLOAD=true` in `.env` only if you must  
+
+Verify after start:
+
+```bash
+docker compose ps
+curl -s http://127.0.0.1:8000/api/health
+# expect: "model_loaded": true  (may take several minutes)
+docker compose logs -f foley-omni
+```
+
 ## 4. Guest / admin usage
 
 | Role | Token | Capabilities |

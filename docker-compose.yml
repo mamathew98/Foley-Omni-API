@@ -10,9 +10,15 @@ services:
     env_file:
       - .env
     environment:
+      # Always win over host .env (local UI smoke tests often set SKIP_MODEL_LOAD=1).
+      SKIP_MODEL_LOAD: "0"
       CKPT_DIR: /app/ckpts
       MODEL_CHECKPOINT: /app/ckpts/Foley-Omni/v2st.pth
       STORAGE_DIR: /app/storage
+      HF_HOME: /app/.cache/huggingface
+      TORCH_HOME: /app/.cache/torch
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
     volumes:
       # Multi-GB weights stay on the host (read-only).
       - ./ckpts:/app/ckpts:ro
@@ -25,6 +31,7 @@ services:
     restart: unless-stopped
     # Single worker is mandatory: one GPU owner, no model duplication.
     shm_size: "8gb"
+    stop_grace_period: 60s
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/api/health"]
       interval: 30s

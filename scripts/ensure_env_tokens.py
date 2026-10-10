@@ -19,6 +19,11 @@ PLACEHOLDERS = {
     "ACCESS_TOKEN": "change-me-guest-preview-token",
     "ADMIN_TOKEN": "change-me-admin-token-different",
 }
+# Also treat older example values as unset so deploy regenerates them.
+LEGACY_PLACEHOLDERS = {
+    "ACCESS_TOKEN": {"change-me-buyer-preview-token"},
+    "ADMIN_TOKEN": set(),
+}
 
 
 def main() -> int:
@@ -39,7 +44,8 @@ def main() -> int:
     for key, placeholder in PLACEHOLDERS.items():
         match = re.search(rf"^{key}=(.*)$", text, flags=re.M)
         current = match.group(1).strip() if match else ""
-        if (not current) or current == placeholder:
+        legacy = LEGACY_PLACEHOLDERS.get(key, set())
+        if (not current) or current == placeholder or current in legacy:
             token = secrets.token_urlsafe(24)
             if match:
                 text = re.sub(rf"^{key}=.*$", f"{key}={token}", text, count=1, flags=re.M)

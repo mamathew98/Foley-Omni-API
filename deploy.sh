@@ -94,7 +94,19 @@ else
   log "Using existing tokens from .env"
 fi
 
-mkdir -p "${ROOT_DIR}/storage" "${ROOT_DIR}/ckpts"
+mkdir -p \
+  "${ROOT_DIR}/storage" \
+  "${ROOT_DIR}/storage/cache/huggingface" \
+  "${ROOT_DIR}/storage/cache/torch" \
+  "${ROOT_DIR}/ckpts"
+
+if grep -qE '^SKIP_MODEL_LOAD=1([[:space:]]|$)' "${ROOT_DIR}/.env" 2>/dev/null; then
+  log "NOTE: .env has SKIP_MODEL_LOAD=1 (local UI smoke). Docker Compose overrides this to 0."
+fi
+
+if [[ ! -f "${ROOT_DIR}/ckpts/Foley-Omni/v2st.pth" && "${SKIP_DOWNLOAD}" -eq 1 ]]; then
+  die "Missing ./ckpts/Foley-Omni/v2st.pth and --skip-download was set"
+fi
 
 # --- checkpoints ---
 if [[ "${SKIP_DOWNLOAD}" -eq 0 ]]; then

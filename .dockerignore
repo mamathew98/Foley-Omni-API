@@ -15,6 +15,7 @@ outputs/
 **/.mypy_cache/
 **/.ruff_cache/
 **/.venv/
+**/.venv-ui/
 **/venv/
 graphify-out/
 *.egg-info/
