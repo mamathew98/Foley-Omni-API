@@ -1,0 +1,34 @@
+services:
+  foley-omni:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: foley-omni-preview:latest
+    container_name: foley-omni-preview
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      CKPT_DIR: /app/ckpts
+      MODEL_CHECKPOINT: /app/ckpts/Foley-Omni/v2st.pth
+      STORAGE_DIR: /app/storage
+    volumes:
+      # Multi-GB weights stay on the host (read-only).
+      - ./ckpts:/app/ckpts:ro
+      # Uploads, job metadata, and generated MP4s.
+      - ./storage:/app/storage
+      # Cache for open_clip / HF downloads on first visual-feature extract.
+      - ./storage/cache/huggingface:/app/.cache/huggingface
+      - ./storage/cache/torch:/app/.cache/torch
+    gpus: all
+    restart: unless-stopped
+    # Single worker is mandatory: one GPU owner, no model duplication.
+    shm_size: "8gb"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      # HTTP comes up before weights finish loading; allow long GPU init.
+      start_period: 600s

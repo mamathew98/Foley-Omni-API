@@ -8,6 +8,11 @@ __pycache__/
 
 ckpts/
 outputs/
+storage/**
+!storage/.gitkeep
 tmp/
+.env
+.venv/
+.venv-ui/
 
 *.log

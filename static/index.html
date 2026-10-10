@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soundstage Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true">
+    <div class="atmosphere__wash"></div>
+    <div class="atmosphere__orb atmosphere__orb--a"></div>
+    <div class="atmosphere__orb atmosphere__orb--b"></div>
+    <div class="atmosphere__grain"></div>
+  </div>
+
+  <!-- Access gate: one full-viewport composition -->
+  <section id="gate" class="gate" aria-label="Access">
+    <div class="gate__inner">
+      <p class="brand-mark">Soundstage</p>
+      <h1 class="gate__headline">Hear the picture.</h1>
+      <p class="gate__lede">
+        Private preview — generate speech, sound effects, and music locked to your clip.
+      </p>
+
+      <div class="gate__panel">
+        <label class="field" for="token-input">
+          <span class="field__label">Access token</span>
+          <input
+            type="password"
+            id="token-input"
+            class="field__control"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Paste the token you were given"
+          />
+        </label>
+        <p id="gate-error" class="error hidden" role="alert"></p>
+        <button type="button" id="gate-submit" class="btn btn--primary btn--block">
+          Enter studio
+        </button>
+        <p class="gate__fineprint">Token stays in this browser only. Clips ≤ 10 seconds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Authenticated studio -->
+  <div id="app-shell" class="shell hidden">
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="brand-mark brand-mark--sm">Soundstage</span>
+        <span class="topbar__divider" aria-hidden="true"></span>
+        <span class="topbar__caption">Private preview</span>
+      </div>
+      <div id="session-bar" class="session">
+        <span id="health-line" class="health" aria-live="polite"></span>
+        <span id="role-badge" class="role"></span>
+        <button type="button" id="logout-btn" class="btn btn--ghost btn--compact">Sign out</button>
+      </div>
+    </header>
+
+    <main id="app-main" class="studio">
+      <section class="studio__compose" aria-labelledby="compose-title">
+        <header class="section-head">
+          <h2 id="compose-title">Compose</h2>
+          <p>Describe what should be heard. At least one field below is enough.</p>
+        </header>
+
+        <form id="job-form" class="compose-form">
+          <div class="dropzone" id="dropzone">
+            <input type="file" id="video-input" accept="video/*" required />
+            <div class="dropzone__body">
+              <p class="dropzone__title" id="dropzone-title">Drop a video</p>
+              <p class="dropzone__hint">MP4 / MOV · max 10 seconds · click to browse</p>
+              <p class="dropzone__file hidden" id="dropzone-file"></p>
+            </div>
+          </div>
+
+          <div class="compose-grid">
+            <label class="field">
+              <span class="field__label">Words <em>speech</em></span>
+              <textarea id="words" class="field__control" rows="2" placeholder="What should be spoken…"></textarea>
+            </label>
+            <label class="field field--span">
+              <span class="field__label">Audio caption <em>SFX · ambience · voice</em></span>
+              <textarea id="audio-caption" class="field__control" rows="3" placeholder="Footsteps on gravel, distant traffic, a calm female voice…"></textarea>
+            </label>
+            <label class="field field--span">
+              <span class="field__label">Music <em>optional</em></span>
+              <textarea id="music" class="field__control" rows="2" placeholder="Soft piano, medium tempo, warm and understated…"></textarea>
+            </label>
+          </div>
+
+          <details class="advanced">
+            <summary>Advanced</summary>
+            <div class="advanced__row">
+              <label class="field">
+                <span class="field__label">Seed</span>
+                <input type="number" id="seed" class="field__control" value="103" />
+              </label>
+              <label class="field">
+                <span class="field__label">Sample steps</span>
+                <input type="number" id="sample-steps" class="field__control" value="50" min="1" max="100" />
+              </label>
+            </div>
+          </details>
+
+          <p id="form-error" class="error hidden" role="alert"></p>
+
+          <div class="compose-actions">
+            <button type="submit" class="btn btn--primary" id="submit-btn">
+              Generate soundtrack
+            </button>
+            <p class="compose-note">Jobs run one at a time on the preview GPU.</p>
+          </div>
+        </form>
+
+        <aside id="admin-panel" class="admin-strip hidden">
+          <div>
+            <h3>Admin</h3>
+            <p>Clear queued jobs. The job currently on the GPU keeps running.</p>
+          </div>
+          <button type="button" id="clear-queue-btn" class="btn btn--danger btn--compact">Clear queue</button>
+          <p id="admin-msg" class="admin-strip__msg"></p>
+        </aside>
+      </section>
+
+      <section class="studio__reel" aria-labelledby="reel-title">
+        <header class="section-head">
+          <h2 id="reel-title">Your reel</h2>
+          <p>Queued jobs can be removed. Running jobs finish on their own.</p>
+        </header>
+        <div id="jobs-list" class="reel">
+          <div class="reel-empty">
+            <p class="reel-empty__title">Nothing generating yet</p>
+            <p>Your soundtrack clips will appear here.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

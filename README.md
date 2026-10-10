@@ -97,6 +97,23 @@ ckpts/
         └── synchformer_state_dict.pth
 ```
 
+# Preview webapp
+
+A token-gated FastAPI preview UI (single-GPU queue) ships in this repo.
+
+See **[DEPLOY.md](DEPLOY.md)** for Docker + guest/admin tokens + checkpoint mounts.  
+To let users open the app via the PC’s IP on a LAN, see **[docs/SERVE_ON_LINUX_PC.md](docs/SERVE_ON_LINUX_PC.md)**.
+
+**One-shot server deploy** (download ckpts + Docker + serve):
+
+```bash
+# Linux
+chmod +x deploy.sh && ./deploy.sh
+
+# Windows
+deploy.bat
+```
+
 # 🚀 Inference
 
 The current public  checkpoint is designed for videos **up to 10 seconds**.
