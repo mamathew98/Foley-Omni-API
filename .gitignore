@@ -14,5 +14,6 @@ tmp/
 .env
 .venv/
 .venv-ui/
+.cursor/
 
 *.log
