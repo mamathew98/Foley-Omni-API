@@ -17,3 +17,5 @@ suggested_hardware: zero-a10g
 Private soundtrack preview — upload a short video and generate speech, sound effects, and music locked to the picture.
 
 Access requires a guest token (set as Space secret `ACCESS_TOKEN`).
+
+Monorepo deploy steps: see [`docs/SPACE_DEPLOY.md`](../docs/SPACE_DEPLOY.md).

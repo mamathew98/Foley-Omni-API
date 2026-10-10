@@ -2,9 +2,9 @@
 
 Private GPU preview: guests open a simple webpage with an access token; jobs run **one at a time** on a single GPU.
 
-**Public free Hugging Face Space (Gradio + ZeroGPU, Soundstage UI):** see **[hf_space/SPACE_DEPLOY.md](hf_space/SPACE_DEPLOY.md)**. Docker Spaces cannot use ZeroGPU — use that Gradio package for free A10G, or this Docker path with a dedicated GPU.
+**Public free Hugging Face Space (Gradio + ZeroGPU, Soundstage UI):** see **[SPACE_DEPLOY.md](SPACE_DEPLOY.md)**. Docker Spaces cannot use ZeroGPU — use that Gradio package for free A10G, or this Docker path with a dedicated GPU.
 
-**Serving on a Linux PC over LAN / IP** (firewall, share URL + token, optional Nginx/VPN): see **[docs/SERVE_ON_LINUX_PC.md](docs/SERVE_ON_LINUX_PC.md)**.
+**Serving on a Linux PC over LAN / IP** (firewall, share URL + token, optional Nginx/VPN): see **[SERVE_ON_LINUX_PC.md](SERVE_ON_LINUX_PC.md)**.
 
 ## What you get
 

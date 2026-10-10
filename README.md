@@ -101,7 +101,7 @@ ckpts/
 
 A token-gated FastAPI preview UI (single-GPU queue) ships in this repo.
 
-See **[DEPLOY.md](DEPLOY.md)** for Docker + guest/admin tokens + checkpoint mounts.  
+See **[docs/DEPLOY.md](docs/DEPLOY.md)** for Docker + guest/admin tokens + checkpoint mounts.  
 To let users open the app via the PC’s IP on a LAN, see **[docs/SERVE_ON_LINUX_PC.md](docs/SERVE_ON_LINUX_PC.md)**.
 
 **One-shot server deploy** (download ckpts + Docker + serve):

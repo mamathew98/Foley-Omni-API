@@ -118,4 +118,4 @@ Monorepo push of the whole Foley-Omni-API tree also works — `setup_weights.py`
 
 ## Paid alternative
 
-Exact FastAPI + static HTML from the main repo needs a **Docker** Space with a **dedicated** paid GPU (ZeroGPU is Gradio-only). See root [`DEPLOY.md`](../DEPLOY.md) for self-hosted Docker.
+Exact FastAPI + static HTML from the main repo needs a **Docker** Space with a **dedicated** paid GPU (ZeroGPU is Gradio-only). See [`DEPLOY.md`](DEPLOY.md) for self-hosted Docker.

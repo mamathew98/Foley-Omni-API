@@ -2,7 +2,7 @@
 
 This guide explains how to run the preview webapp on a **Linux GPU PC** so guests or teammates can open it in a browser using the machine’s **IP address** (or a hostname), not only `localhost`.
 
-For the full one-shot deploy (checkpoints + Docker), see also [DEPLOY.md](../DEPLOY.md).
+For the full one-shot deploy (checkpoints + Docker), see also [DEPLOY.md](DEPLOY.md).
 
 ---
 

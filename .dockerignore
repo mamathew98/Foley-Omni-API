@@ -36,7 +36,6 @@ examples/features/
 **/*.safetensors
 **/*.ckpt
 
-DEPLOY.md
 README.md
 assets/
 docs/
