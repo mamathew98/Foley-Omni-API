@@ -80,7 +80,7 @@ def load_settings() -> AppSettings:
         model_checkpoint=model_checkpoint,
         storage_dir=storage_dir,
         max_queue_size=int(os.environ.get("MAX_QUEUE_SIZE", "10")),
-        max_video_duration_sec=float(os.environ.get("MAX_VIDEO_DURATION_SEC", "10.0")),
+        max_video_duration_sec=float(os.environ.get("MAX_VIDEO_DURATION_SEC", "30.0")),
         cpu_offload=_env_bool("CPU_OFFLOAD", bool(yaml_cfg.get("cpu_offload", False))),
         sample_rate=int(os.environ.get("SAMPLE_RATE", yaml_cfg.get("sample_rate", 16000))),
         default_sample_steps=int(os.environ.get("SAMPLE_STEPS", yaml_cfg.get("sample_steps", 50))),

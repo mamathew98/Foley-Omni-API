@@ -5,6 +5,17 @@ from __future__ import annotations
 from pathlib import Path
 
 
+def get_video_fps(video_path: str | Path) -> float:
+    import av
+
+    with av.open(str(video_path)) as container:
+        video_stream = container.streams.video[0]
+        video_fps = video_stream.average_rate or video_stream.guessed_rate or 24.0
+        if hasattr(video_fps, "numerator"):
+            return float(video_fps.numerator) / float(video_fps.denominator)
+        return float(video_fps)
+
+
 def get_video_duration_sec(video_path: str | Path) -> float:
     import av
 
@@ -25,7 +36,7 @@ def get_video_duration_sec(video_path: str | Path) -> float:
         return frame_count / float(video_fps)
 
 
-def validate_video_duration(video_path: str | Path, max_duration_sec: float = 10.0) -> float:
+def validate_video_duration(video_path: str | Path, max_duration_sec: float = 30.0) -> float:
     duration = get_video_duration_sec(video_path)
     if duration <= 0:
         raise ValueError("Could not read video duration")

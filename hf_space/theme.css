@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+
+:root {
+  --ink: #141c1a;
+  --ink-soft: #3a4743;
+  --muted: #6b7873;
+  --paper: #f3efe6;
+  --accent: #0c6b66;
+  --accent-deep: #084f4b;
+  --line: rgba(20, 28, 26, 0.14);
+  --panel: rgba(255, 252, 246, 0.82);
+  --danger: #a33b32;
+  --radius: 14px;
+  --font-brand: "Syne", sans-serif;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-ui: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+html, body, .gradio-container {
+  font-family: var(--font-ui) !important;
+  color: var(--ink) !important;
+  background:
+    radial-gradient(900px 420px at 90% -10%, rgba(159, 213, 207, 0.45), transparent 60%),
+    radial-gradient(700px 380px at -5% 100%, rgba(232, 201, 154, 0.35), transparent 55%),
+    linear-gradient(145deg, #f7f3ea 0%, #ebe4d4 45%, #dce8e4 100%) !important;
+  min-height: 100vh;
+}
+
+.gradio-container {
+  max-width: 920px !important;
+  margin: 0 auto !important;
+  padding: 1.5rem 1rem 3rem !important;
+}
+
+footer, .svelte-1edrejj {
+  display: none !important;
+}
+
+/* Brand */
+.ss-brand {
+  font-family: var(--font-brand) !important;
+  font-weight: 800 !important;
+  font-size: clamp(2.4rem, 7vw, 4rem) !important;
+  letter-spacing: -0.04em !important;
+  line-height: 0.95 !important;
+  margin: 0 0 0.75rem !important;
+  color: var(--ink) !important;
+}
+
+.ss-headline {
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.8rem, 5vw, 2.8rem) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 0 0.5rem !important;
+  color: var(--ink) !important;
+}
+
+.ss-lede, .ss-fine {
+  color: var(--ink-soft) !important;
+  max-width: 36rem;
+}
+
+.ss-fine {
+  font-size: 0.85rem !important;
+  color: var(--muted) !important;
+}
+
+.ss-panel {
+  background: var(--panel) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius) !important;
+  padding: 1.15rem !important;
+  box-shadow: 0 18px 50px rgba(20, 28, 26, 0.08) !important;
+  backdrop-filter: blur(12px);
+}
+
+.ss-section-title {
+  font-family: var(--font-display) !important;
+  font-size: 1.75rem !important;
+  margin: 0 0 0.35rem !important;
+}
+
+/* Controls */
+button.primary, .ss-panel button.primary {
+  background: var(--accent) !important;
+  border: none !important;
+  color: #f7fffe !important;
+  font-weight: 600 !important;
+  border-radius: 9px !important;
+}
+
+button.primary:hover {
+  background: var(--accent-deep) !important;
+}
+
+button.secondary, button.stop {
+  border-radius: 9px !important;
+  border: 1px solid var(--line) !important;
+  background: rgba(255, 253, 248, 0.9) !important;
+  color: var(--ink) !important;
+}
+
+input, textarea, .wrap, .block {
+  border-radius: 10px !important;
+}
+
+label span, .label-wrap span {
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-soft) !important;
+}
+
+.ss-error {
+  color: var(--danger) !important;
+  font-size: 0.92rem !important;
+}
+
+.ss-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.ss-topbar .ss-brand {
+  font-size: 1.2rem !important;
+}
+
+.ss-badge {
+  display: inline-block;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+
+@media (max-width: 640px) {
+  .gradio-container {
+    padding: 1rem 0.75rem 2rem !important;
+  }
+  .ss-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

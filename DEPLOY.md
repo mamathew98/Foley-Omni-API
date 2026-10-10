@@ -2,6 +2,8 @@
 
 Private GPU preview: guests open a simple webpage with an access token; jobs run **one at a time** on a single GPU.
 
+**Public free Hugging Face Space (Gradio + ZeroGPU, Soundstage UI):** see **[hf_space/SPACE_DEPLOY.md](hf_space/SPACE_DEPLOY.md)**. Docker Spaces cannot use ZeroGPU — use that Gradio package for free A10G, or this Docker path with a dedicated GPU.
+
 **Serving on a Linux PC over LAN / IP** (firewall, share URL + token, optional Nginx/VPN): see **[docs/SERVE_ON_LINUX_PC.md](docs/SERVE_ON_LINUX_PC.md)**.
 
 ## What you get
@@ -166,7 +168,7 @@ curl -s -X POST -H "X-API-Key: $ADMIN_TOKEN" \
 
 - **One GPU owner**: Compose runs `uvicorn --workers 1`. Do not scale replicas against the same GPU.
 - **Queue cap**: `MAX_QUEUE_SIZE` (default 10). Over capacity → HTTP `429`.
-- **Video limit**: ≤10 seconds (configurable via `MAX_VIDEO_DURATION_SEC`).
+- **Video limit**: ≤30 seconds (configurable via `MAX_VIDEO_DURATION_SEC`). Clips over ~9.5s are generated in FOG-style chunks then stitched.
 - **Cancel**: queued jobs only. Running CUDA work is not aborted in v1.
 - **Restart**: queued/running jobs from a previous process are marked `failed`.
 - **First visual extract**: OpenCLIP may download weights into the Hugging Face cache volume under `./storage/cache`.

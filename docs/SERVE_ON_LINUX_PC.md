@@ -99,7 +99,7 @@ Users:
 
 1. Open the URL in a browser  
 2. Paste the access token  
-3. Upload a short video (≤10s) and generate  
+3. Upload a short video (≤30s) and generate  
 
 **Keep `ADMIN_TOKEN` private** — it can clear the queue.
 
@@ -201,7 +201,7 @@ Uploads and results live under `./storage` on the host. Checkpoints stay in `./c
 | Connection refused | Container down: `docker compose ps`; port mapping `8000:8000` |
 | Page loads, jobs fail / 503 | Wait for `model_loaded: true`; check GPU + `./ckpts`; logs |
 | Out of memory | Need more VRAM; try `CPU_OFFLOAD=true` in `.env` (helps mid-range GPUs, not tiny ones) |
-| Upload fails / large video | Raise `client_max_body_size` if using Nginx; trim video to ≤10s |
+| Upload fails / large video | Raise `client_max_body_size` if using Nginx; trim video to ≤30s |
 
 ---
 
